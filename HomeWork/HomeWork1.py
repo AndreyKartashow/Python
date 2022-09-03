@@ -40,12 +40,12 @@ print('''
 Это программа предназначена для проверки истинности утверждения
 ¬(X V Y V Z) = ¬X ⋀ ¬Y ⋀ ¬Z''')
 x = 0
-y = 0
-z = 0
-while x < 1:
-       while y < 1:
-              while z < 1:
-                     print(not(x or y or z) == (not x) and (not y) and (not z))
+while x < 2:
+       y = 0
+       while y < 2:
+              z = 0
+              while z < 2:
+                     print(f"При x = {x}, y = {y}, z = {z}, значение - {(not(x or y or z)) == ((not x) and (not y) and (not z))}")
                      z += 1
               y += 1
        x += 1

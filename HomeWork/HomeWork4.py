@@ -3,6 +3,8 @@ from gettext import find
 from itertools import count
 import random
 from time import sleep
+from numpy.polynomial import Polynomial
+from numpy.polynomial import polynomial
 
 
 print('''
@@ -91,5 +93,54 @@ while sqr_k > 0:
         str_equation += random_num + '=0'
 print(f'Ваше уравнение сформированно: {str_equation}')
 
+with open("equation.txt", "w", encoding='utf-8') as data:
+        data.writelines(str_equation)
+print("Уравнение записанно в файл equation.txt")
+print('___________________________________________________________________________________')
+'''
+list_poly = [num_k for num_k in range(random.randint(5, 10))]
+p = Polynomial(list_poly)
+print(p)
+'''
 
+# Данную задачу можно было решить с использованием методов, но пока что пусть будет так
+sleep(2)
+print('''
+Задание 5.
+Даны два файла, в каждом из которых находится запись многочлена. 
+Задача - сформировать файл, содержащий сумму многочленов.''')
 
+sleep(2)
+print('\nРешение') 
+# Создаем файл и заполняем его рандомными значениями
+with open("text1.txt", "w") as data:
+    for index_random in range(0, 4):
+        index_random = random.randint(0, 5)
+        data.writelines(f"{index_random}\n")
+print("Индексы находятся в файле text1.txt")
+
+# Создаем второй файл и заполняем его рандомными значениями
+with open("text2.txt", "w") as data:
+    for index_random in range(0, 4):
+        index_random = random.randint(0, 5)
+        data.writelines(f"{index_random}\n")
+print("Индексы находятся в файле text2.txt")
+
+# Считываем значения списка 1 из файла 
+list_one = []
+data_file = open("text1.txt", "r")
+for line in data_file:
+    list_one.append(int(line))
+poly_one = Polynomial(list_one)
+print(f"   Многочлен №1 сформирован: {poly_one}")
+
+# Считываем значения списка 2 из файла 
+list_two = []
+data_file = open("text2.txt", "r")
+for line in data_file:
+    list_two.append(int(line))
+poly_two = Polynomial(list_two)    
+print(f"   Многочлен №2 сформирован: {poly_two}")
+
+sum_poly = polynomial.polyadd(poly_one, poly_two)
+print(f'Сумма многочленов: {sum_poly}')

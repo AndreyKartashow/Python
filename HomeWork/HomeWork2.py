@@ -1,12 +1,6 @@
-from atexit import _clear
-from distutils.command import clean
-from logging.config import valid_ident
-import string
+from audioop import reverse
 import random
 from time import sleep
-from turtle import clear
-from wsgiref import validate
-from xml.etree.ElementTree import tostring
 
 
 '''
@@ -52,10 +46,11 @@ print('\n_______________________________________________________________________
 print('''\nЭта программа предназначенна для расчета суммы чисел, 
 определяемых по закону (1+(1/n))^n при n > 0''')
 number_n = int(input("Введите целое число n > 0: "))
-list_number = []
-for n in range(1, number_n + 1):
-    current_n = round((1+(1/n))**n, 3)
-    list_number.append(current_n)
+list_number = [round((1+(1/n))**n, 3) for n in range(1, number_n + 1)]
+#list_number = []
+#for n in range(1, number_n + 1):
+    #current_n = round((1+(1/n))**n, 3)
+    #list_number.append(current_n)
 print(list_number)
 print(sum(list_number))
 print('___________________________________________________________________________________')
@@ -67,9 +62,10 @@ print('_________________________________________________________________________
 '''
 
 print("\nПервоначальный список заполнен числами от 0 до N")
-first_list = []
-for number in range(0, 10):
-    first_list.append(number)
+first_list = [number for number in range(0, 10)]
+#first_list = []
+#for number in range(0, 10):
+#    first_list.append(number)
 print(first_list)
 print("\nЗатем список перемешали:")
 first_list.reverse()
@@ -89,9 +85,9 @@ print('''\nЭта программа предназначенна для зап�
 их чтения и определения произведения чисел для соответствующих позиций''')
 # Создаем список и заполняем рандомными числами
 list_random_number = []
-for number_random in range(6):
-    number_random = random.randint(1, 10)
-    list_random_number.append(number_random)
+for n in range(6):
+    n = random.randint(1, 10)
+    list_random_number.append(n)
 print(f"Ваш список: {list_random_number}")
 
 

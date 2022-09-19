@@ -1,5 +1,3 @@
-from itertools import count
-from ntpath import join
 from operator import index
 import random
 from time import sleep  
@@ -12,10 +10,11 @@ print('''
 
 sleep(2)
 print('\nРешение')
-list_random = []
-lenght_list = random.randint(5, 10)
-for number in range(lenght_list):
-    list_random.append(random.randint(2, 7))
+list_random = [(random.randint(2, 7)) for number in range(random.randint(5, 10))]
+#list_random = []
+#lenght_list = random.randint(5, 10)
+#for number in range(lenght_list):
+#    list_random.append(random.randint(2, 7))
 print('Список сформирован: ', end =' ')
 print(list_random)
 
@@ -34,10 +33,12 @@ print('''
 
 sleep(2)
 print('\nРешение')
-list_random = []
-lenght_list = random.randint(5, 10)
-for number in range(lenght_list):
-    list_random.append(random.randint(2, 7))
+func = lambda n: random.randint(2, 7)
+list_random = [func(n) for n in range(5)]
+#list_random = []
+#lenght_list = random.randint(5, 10)
+#for number in range(lenght_list):
+#    list_random.append(random.randint(2, 7))
 print('Список сформирован: ', end =' ')
 print(list_random)
 
@@ -69,15 +70,19 @@ print('''
 
 sleep(2)
 print('\nРешение')
-list_float = []
-lenght_list = random.randint(5, 10)
-for counter in range(lenght_list):
-    list_float.append(round(random.random()*10, 2))
+f = lambda x: round(random.random()*10, 2)
+rand = random.randint(5, 10)
+list_float = [f(n) for n in range(rand)]
+#list_float = []
+#lenght_list = random.randint(5, 10)
+#for counter in range(lenght_list):
+#    list_float.append(round(random.random()*10, 2))
 
-    ''' Конкотация строк
+''' 
+    Конкотация строк
     number_string = str(random.randint(0, 10)) + '.' + str(random.randint(0, 99))
     list_float.append(number_string)
-    '''
+'''
 
 print(f'Список сформирован: {list_float}')
 

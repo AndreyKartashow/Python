@@ -9,62 +9,151 @@ print('''
 
 sleep(2)
 print('\nРешение')
-'''
-condition = True
-while condition == True:
-    expression = input('Введите выражение, например 4+5*3: ')
-    for element in expression:
-        print(element)
-        if element not in '0 1 2 3 4 5 6 7 8 9 + - * /'.split():
-            break
-        else:
-            condition == False
-'''
-            
 expression = input('Введите выражение, например 4+5*3: ')
+staples = ''
 result = 0
-index = 0
+
+# Все операции умножения
 while '*' in expression:
     for i in range(len(expression)):
+        # Поиск умножения
         if expression[i] == '*':
-            result += int(expression[i - 1]) * int(expression[i + 1])
-            expression = expression[:i-1] + str(result) + expression[i+2:]
+
+            # Проверка левой позиции
+            curent_left = i - 1
+            left = ''
+            while curent_left != -1:
+                if expression[curent_left] != '*' and expression[curent_left] != '/' and expression[curent_left] != '+' and expression[curent_left] != '-':
+                    left = expression[curent_left] + left
+                    curent_left -= 1
+                else:
+                    break
+            left_n = float(left)
+
+            # Проверка правой позиции
+            curent_right = i + 1
+            right = ''
+            while curent_right != len(expression):
+                if expression[curent_right] != '*' and expression[curent_right] != '/' and expression[curent_right] != '+' and expression[curent_right] != '-':
+                    right = right + expression[curent_right]
+                    curent_right += 1
+                else:
+                    break
+            right_n = float(right)
+
+            # результирующая подвыражения
+            result += left_n * right_n
+            expression = expression[:curent_left+1] + str(result) + expression[curent_right:]
             result = 0
             print(expression)
             break
+
+# Все операции деления
+while '/' in expression:
+    for i in range(len(expression)):
+        # Поиск умножения
+        if expression[i] == '/':
+
+            # Проверка левой позиции
+            curent_left = i - 1
+            left = ''
+            while curent_left != -1:
+                if expression[curent_left] != '*' and expression[curent_left] != '/' and expression[curent_left] != '+' and expression[curent_left] != '-':
+                    left = expression[curent_left] + left
+                    curent_left -= 1
+                else:
+                    break
+            left_n = float(left)
+
+            # Проверка правой позиции
+            curent_right = i + 1
+            right = ''
+            while curent_right != len(expression):
+                if expression[curent_right] != '*' and expression[curent_right] != '/' and expression[curent_right] != '+' and expression[curent_right] != '-':
+                    right = right + expression[curent_right]
+                    curent_right += 1
+                else:
+                    break
+            right_n = float(right)
+
+            # результирующая подвыражения
+            result += left_n / right_n
+            expression = expression[:curent_left+1] + str(result) + expression[curent_right:]
+            result = 0
+            print(expression)
+            break
+
+# Все операции сложения
 while '+' in expression:
     for i in range(len(expression)):
+        # Поиск сложения
         if expression[i] == '+':
-            result += int(expression[i - 1]) + int(expression[i + 1])
-            expression = expression[:i-1] + str(result) + expression[i+2:]
+
+            # Проверка левой позиции
+            curent_left = i - 1
+            left = ''
+            while curent_left != -1:
+                if expression[curent_left] != '*' and expression[curent_left] != '/' and expression[curent_left] != '+' and expression[curent_left] != '-':
+                    left = expression[curent_left] + left
+                    curent_left -= 1
+                else:
+                    break
+            left_n = float(left)
+
+            # Проверка правой позиции
+            curent_right = i + 1
+            right = ''
+            while curent_right != len(expression):
+                if expression[curent_right] != '*' and expression[curent_right] != '/' and expression[curent_right] != '+' and expression[curent_right] != '-':
+                    right = right + expression[curent_right]
+                    curent_right += 1
+                else:
+                    break
+            right_n = float(right)
+
+            # результирующая подвыражения
+            result += left_n + right_n
+            expression = expression[:curent_left+1] + str(result) + expression[curent_right:]
             result = 0
             print(expression)
             break
 
+# Все операции вычитания
+while '-' in expression:
+    for i in range(len(expression)):
+        # Поиск сложения
+        if expression[i] == '-':
 
-'''
-for i in range(len(expression)):
-        if expression[i] == '*':
-            result += int(expression[i - 1]) * int(expression[i + 1])
-            print(result)
-            expression = expression[:i-1] + str(result) + expression[i+2:]
+            # Проверка левой позиции
+            curent_left = i - 1
+            left = ''
+            while curent_left != -1:
+                if expression[curent_left] != '*' and expression[curent_left] != '/' and expression[curent_left] != '+' and expression[curent_left] != '-':
+                    left = expression[curent_left] + left
+                    curent_left -= 1
+                else:
+                    break
+            left_n = float(left)
+
+            # Проверка правой позиции
+            curent_right = i + 1
+            right = ''
+            while curent_right != len(expression):
+                if expression[curent_right] != '*' and expression[curent_right] != '/' and expression[curent_right] != '+' and expression[curent_right] != '-':
+                    right = right + expression[curent_right]
+                    curent_right += 1
+                else:
+                    break
+            right_n = float(right)
+
+            # результирующая подвыражения
+            result += left_n - right_n
+            expression = expression[:curent_left+1] + str(result) + expression[curent_right:]
+            result = 0
             print(expression)
             break
-'''
-
-
-    
-    
-#print(expression)
-
 
 print('___________________________________________________________________________________')
-
-
-
-
-
-
 
 
 

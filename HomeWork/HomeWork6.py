@@ -49,36 +49,28 @@ def Operation(Ch_oper, expression):   # Ch_oper = '*'
                 # результирующая подвыражения
                 if Ch_oper == '*':
                     result += left_n * right_n
-                    expression = expression[:curent_left+1] + str(result) + expression[curent_right:]
-                    result = 0
-                    print(expression)
-                    break
+
                 elif Ch_oper == '/':
                     result += left_n / right_n
-                    expression = expression[:curent_left+1] + str(result) + expression[curent_right:]
-                    result = 0
-                    print(expression)
-                    break
+
                 elif Ch_oper == '+':
                     result += left_n + right_n
-                    expression = expression[:curent_left+1] + str(result) + expression[curent_right:]
-                    result = 0
-                    print(expression)
-                    break
+
                 elif Ch_oper == '-':
                     result += left_n - right_n
-                    expression = expression[:curent_left+1] + str(result) + expression[curent_right:]
-                    result = 0
-                    print(expression)
-                    break
+
+                expression = expression[:curent_left+1] + str(result) + expression[curent_right:]
+                result = 0
+                print(expression)
+                break
     return expression
 
 
 def Calculator(expression):
     expression = Operation('*', expression)
     expression = Operation('/', expression)
-    expression = Operation('+', expression)
     expression = Operation('-', expression)
+    expression = Operation('+', expression)
 
 
 sleep(2)

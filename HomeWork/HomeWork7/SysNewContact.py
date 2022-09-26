@@ -25,9 +25,10 @@ def NewContact():
             key = input()
 
         if key == '1':
-            with open('users.csv', 'a', encoding='utf-8') as f:
+            with open('users.csv', 'a', encoding='utf-8', newline='') as f:
                 writer = csv.writer(f)
                 writer.writerow(user_list)
+
             inputData = False
             os.system('cls')
             print('Контакт успешно добавлен')

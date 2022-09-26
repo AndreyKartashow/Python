@@ -2,6 +2,7 @@ import os, sys
 from SysNewContact import NewContact
 from SysFindContact import FindContact
 from SysFindAll import FindAll
+from SysDelContact import DelContact
 
 def printMenu():
     print('')
@@ -36,7 +37,7 @@ def MainMenu():
         case '3':
             FindContact()
         case '4':
-            print('удалить контакт')
+            DelContact()
         case '5':
             os.system('cls')
             print('Программа закрыта.')

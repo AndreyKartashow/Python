@@ -3,7 +3,7 @@ import csv, os, time
 
 def FindContact():
     search = True
-    
+
     while search:
         os.system('cls')
         item = input('Введите один из параметров поиска: ')
@@ -14,6 +14,7 @@ def FindContact():
                 if item in row:
                     print(' '.join(row))
                     time.sleep(0.5)
+            # выводит всегда, исправить
             if item not in reader:    
                 print('Контакты по такому параметру не найдены')
 

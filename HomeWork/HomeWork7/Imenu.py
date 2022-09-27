@@ -1,19 +1,17 @@
 import os, sys
 from SysNewContact import NewContact
 from SysFindContact import FindContact
-from SysFindAll import FindAll
+from SysPrintAll import PrintAll
 from SysDelContact import DelContact
 
 def printMenu():
     print('')
     print('Это ваша телефонная книга.')
-    print('Вы можете:')
-    print('''
-    "1" - Посмотреть все контакты
-    "2" - Добавить новый контакт
-    "3" - Найти контакт
-    "4" - Удалить контакт
-    "5" - Выйти из приложения
+    print('''Вы можете: "1" - Посмотреть все контакты
+           "2" - Добавить новый контакт
+           "3" - Найти контакт
+           "4" - Удалить контакт
+           "5" - Выйти из приложения
     ''')
 
 
@@ -24,25 +22,27 @@ def InputActionInMenu():
     return action_menu
 
 
-def MainMenu():
+def MainMenu(list_local):
     os.system('cls')
     printMenu()
     action = InputActionInMenu()
 
     match action:
         case '1':
-            FindAll()
+            PrintAll(list_local)
+            input('\nВведите "Enter" для выхода в главное меню ')
         case '2':
-            NewContact()        
+            NewContact(list_local)
+            input('\nВведите "Enter" для выхода в главное меню ')        
         case '3':
-            FindContact()
+            FindContact(list_local)
+            input('\nВведите "Enter" для выхода в главное меню ')
         case '4':
-            DelContact()
+            DelContact(list_local)
         case '5':
             os.system('cls')
             print('Программа закрыта.')
             sys.exit()
 
-while True:
-    MainMenu()
+
 

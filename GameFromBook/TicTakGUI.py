@@ -104,12 +104,6 @@ def chooseRandomMoveFromList(board, moveList):
 
 
 def getComputerMove(board, computerLetter):
-    # Учитывая заполнение поля и инициалы компьютера, определяем допустимый ход
-    if computerLetter == 'X':
-        playerLetter = '0'
-    else:
-        playerLetter = 'X'
-
     # Это алгоритм для ИИ
     # Сначала проверяем - победим ли мы, сделав следующий ход
     for i in range(1, 10):
@@ -148,7 +142,7 @@ def isBoardFull(board):
     return True
 
 
-
+event_list = [K_KP1, K_KP2, K_KP3, K_KP4, K_KP5, K_KP6, K_KP7, K_KP8]
 
 theBoard = [' '] * 10
 playerLetter, computerLetter = inputPlayerLetter()
@@ -157,46 +151,22 @@ gameIsPlaying = True
     
 for b in boxes:
     pygame.draw.rect(windowSurface, b['color'], b['rect'])
+
     
 while gameIsPlaying:
+    if turn == 'Человек':
 
-    for event in pygame.event.get():
-        #if event.type == QUIT:
-        #    pygame.quit()
-        #    sys.exit()
-        
-        
-        if turn == 'Человек':
-            # Ход игрока
+        for event in pygame.event.get():
+
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
 
             if event.type == KEYDOWN:
-                if event.key == K_KP1:
-                    boxes[0]['color'] = GREEN
-                    makeMove(theBoard, playerLetter, boxes[0]['pos'])
-                if event.key == K_KP2:
-                    boxes[1]['color'] = GREEN
-                    makeMove(theBoard, playerLetter, boxes[1]['pos'])
-                if event.key == K_KP3:
-                    boxes[2]['color'] = GREEN
-                    makeMove(theBoard, playerLetter, boxes[2]['pos'])
-                if event.key == K_KP4:
-                    boxes[3]['color'] = GREEN
-                    makeMove(theBoard, playerLetter, boxes[3]['pos'])
-                if event.key == K_KP5:
-                    boxes[4]['color'] = GREEN
-                    makeMove(theBoard, playerLetter, boxes[4]['pos'])
-                if event.key == K_KP6:
-                    boxes[5]['color'] = GREEN
-                    makeMove(theBoard, playerLetter, boxes[5]['pos'])
-                if event.key == K_KP7:
-                    boxes[6]['color'] = GREEN
-                    makeMove(theBoard, playerLetter, boxes[6]['pos'])
-                if event.key == K_KP8:
-                    boxes[7]['color'] = GREEN
-                    makeMove(theBoard, playerLetter, boxes[7]['pos'])
-                if event.key == K_KP9:
-                    boxes[8]['color'] = GREEN
-                    makeMove(theBoard, playerLetter, boxes[8]['pos'])
+                if event.key in event_list:
+                    i = event_list.index(event.key)
+                    boxes[i]['color'] = GREEN
+                    makeMove(theBoard, playerLetter, boxes[i]['pos'])
 
             if isWinner(theBoard, playerLetter):
                 print('\nВы выйграли!')
@@ -208,82 +178,30 @@ while gameIsPlaying:
                 else:
                     turn = 'Компьютер'
 
-        else:
-            # Ход компьютера
-        
-            if event.type == KEYDOWN:
-                if event.key == K_KP1:
-                    boxes[0]['color'] = RED
-                    makeMove(theBoard, computerLetter, boxes[0]['pos']) 
-                if event.key == K_KP2:
-                    boxes[1]['color'] = RED
-                    makeMove(theBoard, computerLetter, boxes[1]['pos'])
-                if event.key == K_KP3:
-                    boxes[2]['color'] = RED
-                    makeMove(theBoard, computerLetter, boxes[2]['pos'])
-                if event.key == K_KP4:
-                    boxes[3]['color'] = RED
-                    makeMove(theBoard, computerLetter, boxes[3]['pos'])
-                if event.key == K_KP5:
-                    boxes[4]['color'] = RED
-                    makeMove(theBoard, computerLetter, boxes[4]['pos'])
-                if event.key == K_KP6:
-                    boxes[5]['color'] = RED
-                    makeMove(theBoard, computerLetter, boxes[5]['pos'])
-                if event.key == K_KP7:
-                    boxes[6]['color'] = RED
-                    makeMove(theBoard, computerLetter, boxes[6]['pos'])
-                if event.key == K_KP8:
-                    boxes[7]['color'] = RED
-                    makeMove(theBoard, computerLetter, boxes[7]['pos'])
-                if event.key == K_KP9:
-                    boxes[8]['color'] = RED
-                    makeMove(theBoard, computerLetter, boxes[8]['pos'])
+    else:
+        # Ход компьютера
+        move = getComputerMove(theBoard, computerLetter)
+        boxes[move-1]['color'] = RED
+        makeMove(theBoard, computerLetter, move)
 
-            if isWinner(theBoard, computerLetter):
-                print('\nКомпьютер выйграл!')
-                gameIsPlaying = False
+
+        if isWinner(theBoard, computerLetter):
+            print('\nКомпьютер победил! Вы проиграли.')
+            gameIsPlaying = False
+        else:
+            if isBoardFull(theBoard):
+                print('\nНичья!')
+                break
             else:
-                if isBoardFull(theBoard):
-                    print('\nНичья!')
-                    break
-                else:
-                    turn = 'Человек'
+                turn = 'Человек'
+        sleep(2)
 
     for b in boxes:
         pygame.draw.rect(windowSurface, b['color'], b['rect'])
     pygame.display.update()
-
-        
-
+   
 
 '''
-
-        else:
-            # Ход компьютера
-            move = getComputerMove(theBoard, computerLetter)
-            makeMove(theBoard, computerLetter, move)
-            for b in range(len(boxes)):
-                if move == b:
-                    b['color'] = RED
-
-            if isWinner(theBoard, computerLetter):
-                print('\nКомпьютер победил! Вы проиграли.')
-                gameIsPlaying = False
-            else:
-                if isBoardFull(theBoard):
-                    print('\nНичья!')
-                    break
-                else:
-                    turn = 'Человек'
-            sleep(2)
-
-'''    
-
-        
-
-'''
-
     print('\nСыграем еще раз? (да или нет)')
     if not input().lower().startswith('д'):
         break

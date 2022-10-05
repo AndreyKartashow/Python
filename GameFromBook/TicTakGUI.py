@@ -142,7 +142,7 @@ def isBoardFull(board):
     return True
 
 
-event_list = [K_KP1, K_KP2, K_KP3, K_KP4, K_KP5, K_KP6, K_KP7, K_KP8]
+event_list = [K_KP1, K_KP2, K_KP3, K_KP4, K_KP5, K_KP6, K_KP7, K_KP8, K_KP9]
 
 theBoard = [' '] * 10
 playerLetter, computerLetter = inputPlayerLetter()
@@ -152,12 +152,14 @@ gameIsPlaying = True
 for b in boxes:
     pygame.draw.rect(windowSurface, b['color'], b['rect'])
 
+tic = []
+tac = []
     
 while gameIsPlaying:
     if turn == 'Человек':
 
-        for event in pygame.event.get():
-
+        while True:
+            event = pygame.event.wait()
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
@@ -166,22 +168,25 @@ while gameIsPlaying:
                 if event.key in event_list:
                     i = event_list.index(event.key)
                     boxes[i]['color'] = GREEN
+                    tic.append([boxes[i]['rect'].topleft, boxes[i]['rect'].bottomright, boxes[i]['rect'].topright, boxes[i]['rect'].bottomleft])
                     makeMove(theBoard, playerLetter, boxes[i]['pos'])
-
-            if isWinner(theBoard, playerLetter):
-                print('\nВы выйграли!')
-                gameIsPlaying = False
-            else:
-                if isBoardFull(theBoard):
-                    print('\nНичья!')
                     break
-                else:
-                    turn = 'Компьютер'
+
+        if isWinner(theBoard, playerLetter):
+            print('\nВы выйграли!')
+            gameIsPlaying = False
+        else:
+            if isBoardFull(theBoard):
+                print('\nНичья!')
+                break
+            else:
+                turn = 'Компьютер'
 
     else:
         # Ход компьютера
         move = getComputerMove(theBoard, computerLetter)
         boxes[move-1]['color'] = RED
+        tac.append([boxes[move-1]['rect'].center, 48])
         makeMove(theBoard, computerLetter, move)
 
 
@@ -198,6 +203,11 @@ while gameIsPlaying:
 
     for b in boxes:
         pygame.draw.rect(windowSurface, b['color'], b['rect'])
+    for i in tic:
+        pygame.draw.line(windowSurface, BLACK, i[0], i[1], 4)
+        pygame.draw.line(windowSurface, BLACK, i[2], i[3], 4)
+    for i in tac:
+        pygame.draw.circle(windowSurface, BLACK, i[0], i[1], 4)
     pygame.display.update()
    
 

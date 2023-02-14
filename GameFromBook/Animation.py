@@ -30,7 +30,7 @@ while True:
             pygame.quit()
             sys.exit()
 
-    windowSurface.fill(WHITE)
+    #windowSurface.fill(WHITE)
 
     for b in boxes:
         if b['dir'] == DOWNLEFT:
@@ -73,7 +73,7 @@ while True:
         pygame.draw.rect(windowSurface, b['color'], b['rect'])
 
     pygame.display.update()
-    time.sleep(0.02)
+    #time.sleep(0.02)
 
 
 

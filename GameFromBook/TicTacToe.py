@@ -1,6 +1,6 @@
 import random
-from shutil import move
 from time import sleep
+
 
 
 def drawBoard(board):

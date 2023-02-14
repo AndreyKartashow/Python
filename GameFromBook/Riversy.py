@@ -1,7 +1,5 @@
 import random
-from sre_parse import DIGITS
 import sys
-
 
 
 WIDTH = 8 # ширина игрового поля
@@ -118,7 +116,7 @@ def whoGoesFirst():
 
 
 def makeMove(board, tile, xstart, ystart):
-    # возвращает истину если можно сделать ход и перевернуть фишку,, иначе лож
+    # возвращает истину если можно сделать ход и перевернуть фишку, иначе лож
     tilesToFlip = isValidMove(board, tile, xstart, ystart)
 
     if tilesToFlip == False:
@@ -212,6 +210,7 @@ def playGame(playerTile, computerTile):
 
         if playerValidMoves == [] and computerValidMoves == []:
             return board # ходов нет ни у одного из игроков
+            
         elif turn == 'Человек':
             if playerValidMoves != []:
                 if showHints:

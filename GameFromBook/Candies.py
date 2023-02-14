@@ -38,7 +38,6 @@ while True:
 
     while gameIsPlaying:
         if turn == 'Человек':
-            # Ход игрока
             candiesPlayer = getPlayerMove()
             candies -= candiesPlayer
             print(f'Вы взяли {candiesPlayer} конфет, на столе осталось {candies}')
@@ -48,12 +47,8 @@ while True:
                 gameIsPlaying = False
             else:
                 turn = 'Компьютер'
-
-        
         else:
-            # Ход компьютера
             #candiesComp = random.randint(1, 28) 
-
             candiesComp = getComputerMove(candies)
             candies -= candiesComp
             print(f'Опонент взял {candiesComp} конфет, на столе осталось {candies}')
